@@ -21,12 +21,27 @@
     <!-- Aquí irán tus clases y propiedades de conexión (driver, url, user, password) -->
     <class>com.productos.entities.Producto</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://127.0.0.1:5432/postgres"/>
-      <property name="javax.persistence.jdbc.user" value="postgres"/>
-      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="1234"/>
-      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+      <property name="" />
+        <!-- URL de la base de datos, conconfigurando la base y el comportamiento con fechas -->
+      <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://127.0.0.1:5432/postgres"/>
+      <!-- Usuario, contraseña y driver para la conexión a la base datos -->
+      <property name="jakarta.persistence.jdbc.user" value="postgres"/>
+      <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+      <property name="jakarta.persistence.jdbc.password" value="1234"/>
+       
+      
       <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
+      <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
+      <!-- Mostrar las secuencias SQL -->
+      <property name="hibernate.show_sql" value="false"/>
+      <!-- Formatear las secuencias SQL -->
+      <property name="hibernate.format_sql" value="true"/>
+      <!-- Habilitar las secuencias "SQL logging" para ver consultas en los logs -->
+      <property name="hibernate.use_sql_comments" value="true"/>
+      <!-- Habilitar la actualización automática de esquema si es necesario-->
+      <property name="hibernate.hbdm2ddl.auto" value="update"/>
+      <!-- Reemplazar el dialecto en caso de que no se seleccione automáticamente -->
+     <!-- <property name="hibernate.dialect" value="org.hibernate.dialect.Hy5QL80ialect"/> -->
     </properties>
   </persistence-unit>
 </persistence>

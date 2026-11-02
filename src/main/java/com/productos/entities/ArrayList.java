@@ -8,6 +8,9 @@ package com.productos.entities;
  *
  * @author Josselin
  */
- private class Categoria {
-    @Id
+public class ArrayList {
+
+    public ArrayList() {
+    }
+    
 }

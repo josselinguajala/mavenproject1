@@ -1,3 +1,9 @@
-com\productos\mavenproject1\Mavenproject1.class
+com\bamboosmile\dao\BamboosmileDAO.class
+com\productos\entities\ArrayList.class
+com\productos\entities\Factura.class
+com\bamboosmile\dao\Main.class
+com\productos\entities\DetalleFacturaa.class
+com\productos\entities\Usuario.class
 com\productos\entities\Producto.class
-com\productos\entities\Categoria.class
+com\productos\entities\GetNombre.class
+com\productos\entities\Client.class

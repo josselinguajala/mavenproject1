@@ -49,6 +49,41 @@ public class BamboosmileDAO{
         query.setParameter("nombre", "%" + nombre + "%");
         return query.getResultList();
     }
+    
+        // --- CONSULTA 1: FILTRO y ORDENAMIENTO ---
+    // Obtener los productos de una categoría específica, ordenados por precio de mayor a menor.
+    public List<Producto> obtenerProductosPorCategoriaOrdenados(String nombreCategoria) {
+        String jpql = "SELECT p FROM Producto p JOIN p.categorias c " +
+                      "WHERE c.nombre = :catNombre " +
+                      "ORDER BY p.precio DESC";
+        TypedQuery<Producto> query = em.createQuery(jpql, Producto.class);
+        query.setParameter("catNombre", nombreCategoria);
+        return query.getResultList();
+    }
+
+    // --- CONSULTA 2: PAGINACIÓN ---
+    // Obtener los pedidos (facturas) de forma paginada (ej. para un frontend) ordenados por fecha reciente.
+    public List<Factura> obtenerFacturasPaginadas(int pagina, int tamanoPagina) {
+        String jpql = "SELECT f FROM Factura f ORDER BY f.fecha DESC";
+        TypedQuery<Factura> query = em.createQuery(jpql, Factura.class);
+        
+        // Paginación: setFirstResult define desde qué registro empezar, setMaxResults cuántos traer
+        query.setFirstResult((pagina - 1) * tamanoPagina); 
+        query.setMaxResults(tamanoPagina);
+        
+        return query.getResultList();
+    }
+
+    // --- CONSULTA 3: FILTROS COMBINADOS (Rango) ---
+    // Buscar clientes que tengan pedidos con un total mayor a un monto específico, ordenados por nombre.
+    public List<Client> obtenerClientesVIP(Double montoMinimo) {
+        String jpql = "SELECT DISTINCT c FROM Cliente c JOIN c.facturas f " +
+                      "WHERE f.valorTotal >= :monto " +
+                      "ORDER BY c.nombre ASC";
+        TypedQuery<Client> query = em.createQuery(jpql, Client.class);
+        query.setParameter("monto", montoMinimo);
+        return query.getResultList();
+    }
 
     // --- UPDATE: Actualizar el estado de un pedido (simulado con descuento) ---
     public void actualizarDescuentoPedido(Long facturaId, Double nuevoDescuento) {

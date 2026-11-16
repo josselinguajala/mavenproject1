@@ -13,6 +13,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -33,7 +36,15 @@ import lombok.Setter;
  */
 
 public class Producto{
-
+    // En Producto.java
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+        name = "producto_categoria",
+        joinColumns = @JoinColumn(name = "producto_id"),
+        inverseJoinColumns = @JoinColumn(name = "categoria_id")
+    )
+    
+    private List<Categoria> categorias;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Estrategia de generación de ID autoincremental
     private Long id;
@@ -51,6 +62,8 @@ public class Producto{
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DetalleFacturaa> detalles = new ArrayList<>();
 
+    
+    
     // Constructores, getters y setters
     public Producto() {}
 
